@@ -234,9 +234,10 @@ export async function checkAccelerator(accelerator, modeFlags = 0, grabFlags = 0
             );
         });
 
-        // If successful, use the result of ungrabbing as our return
+        // If grab succeeded, the accelerator is available
         if (action !== 0) {
-            result = await new Promise((resolve, reject) => {
+            result = true;
+            await new Promise((resolve, reject) => {
                 Gio.DBus.session.call(
                     'org.gnome.Shell',
                     '/org/gnome/Shell',
