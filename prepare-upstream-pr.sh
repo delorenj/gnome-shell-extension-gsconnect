@@ -4,6 +4,12 @@
 
 # Script to prepare a PR for upstream GSConnect repository
 # This script automates the process described in UPSTREAM_PR.md
+#
+# The fix is in commit 97752cb from the merged PR #1
+# When cherry-picked to the upstream branch, it becomes commit 77440ad
+#
+# You can override the commit to cherry-pick by setting FIX_COMMIT:
+#   FIX_COMMIT=<commit-hash> ./prepare-upstream-pr.sh
 
 set -e
 
@@ -42,9 +48,12 @@ if git log --oneline --grep="keyboard shortcut availability check" -1 | grep -q 
     echo "Fix appears to already be in the branch"
 else
     echo "Applying fix..."
-    # Cherry-pick the fix commit
-    git cherry-pick 97752cbd9b98e2fb076331dc3422aea58feaf90c || {
+    # Cherry-pick the fix commit from the merged PR branch
+    # This is commit 97752cb which contains the keyboard shortcut availability check fix
+    FIX_COMMIT="${FIX_COMMIT:-97752cbd9b98e2fb076331dc3422aea58feaf90c}"
+    git cherry-pick "$FIX_COMMIT" || {
         echo "Cherry-pick failed. You may need to resolve conflicts manually."
+        echo "Attempting to cherry-pick commit: $FIX_COMMIT"
         exit 1
     }
 fi

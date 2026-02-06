@@ -21,8 +21,9 @@ All necessary files and documentation have been prepared for creating a Pull Req
 ### 2. Branch Created
 - **Branch Name:** `upstream-pr-keyboard-shortcut-fix`
 - **Base:** Commit `3724ff6` (Use DesktopAppInfo from GioUnix, if possible)
-- **Contains:** Single commit with the fix (commit `77440ad`)
+- **Contains:** Single commit with the fix (commit `77440ad`, cherry-picked from `97752cb`)
 - **Status:** Clean, ready to be rebased on upstream/main if needed
+- **Note:** The fix commit `97752cb` from the merged PR was cherry-picked to create a clean branch for upstream
 
 ### 3. Documentation Created
 Four comprehensive documents to guide the PR submission:
